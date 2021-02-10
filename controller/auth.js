@@ -1,4 +1,6 @@
+
 const mysql = require('mysql');
+const nodemailer = require('nodemailer');
 
 var db = mysql.createConnection({
     host : 'localhost',
@@ -7,12 +9,44 @@ var db = mysql.createConnection({
     database : 'nodejs_users'
 });
 
+var transport = nodemailer.createTransport({
+    service : 'gmail',
+    auth : {
+        user : 'xxxx@gmail.com',
+        pass: 'xxxx'
+    }
+})
 db.connect((error)=>{
     if(error){
         console.log(error);
     } 
     console.log("DB COnn\'d");
 });
+
+
+exports.addUser = (req,res)=>{
+    var{name,mail}=req.body;
+    db.query('select * from users where mail = ?',[mail],
+        (error,results)=>{
+            if(error){
+                console.log(error)
+            }else{
+                if(results.length>0){
+                    res.send("Email alrady exists !");
+                }else{
+                    console.log('insert query');
+                    db.query('insert into users set ?',{name : name,mail : mail},
+                        (error,results)=>{
+                            if(error){
+                                console.log(error);
+                            }else{
+                                res.send('Inserted Successfully !');
+                            }
+                        })
+                }
+            }
+        })
+}
 
 function getFolder(name, list){
     console.log(list)
@@ -121,40 +155,74 @@ function recFunc(parent){
 }
 
 exports.add = (req,res)=>{
-    let {name,parent,Type} = req.body;
-    
-    if(parent==''){
-        db.query('insert into angelList_Task set ?',
-        {name : name,parent:null,Type:Type},(error, results)=>{
+    let {name,parent,Type,User} = req.body;
+
+    db.query('select * from users where name =?',[User],
+        (error,results)=>{
             if(error){
-                console.log(error);
-            }
-            if(results){
-                res.send('Inserted Successfully !');
+                console.log(error)
+            }else{
+                if(results.length>0){
+                    db.query('select * from users where name <> ?',[User],
+                        (error,results)=>{
+                            if(error){
+                                console.log(error)
+                            }else{
+                                results.forEach((element)=>{
+                                    const message = {
+                                        from:'xxxx@gmail.com',
+                                        to:element.mail,
+                                        subject : 'Files Management',
+                                        text : User+'  just added new File/Folder.'
+                                    };
+                                    transport.sendMail(message,(error,results)=>{
+                                        if(error){
+                                            console.log(error)
+                                        }else{
+                                            console.log(results)
+                                        }
+                                    });
+                                })
+                            }
+                        })
+                    //adding Files & Folders
+                    if(parent==''){
+                        db.query('insert into angelList_Task set ?',
+                        {name : name,parent:null,Type:Type,User:User},(error, results)=>{
+                            if(error){
+                                console.log(error);
+                            }
+                            if(results){
+                                res.send('Inserted Successfully !');
+                            }
+                        })
+                    }else{
+                        db.query('select parent from angelList_Task where Name = ?',[parent],
+                            (error,results)=>{
+                                if(error){
+                                    console.log(error);
+                                }
+                                if(results.length > 0){
+                                    db.query('insert into angelList_Task set ?',
+                                    {name : name,parent:parent,Type:Type,User:User},(error, results)=>{
+                                        if(error){
+                                            console.log(error);
+                                        }
+                                        if(results){
+                                            res.send('Inserted Successfully !');
+                                        }
+                                    })
+                                }else{
+                                    res.send([parent]+' not found');
+                                }
+                            })
+                        
+                    }
+                }else{
+                    res.send("user not exist !");
+                }
             }
         })
-    }else{
-        db.query('select parent from angelList_Task where Name = ?',[parent],
-            (error,results)=>{
-                if(error){
-                    console.log(error);
-                }
-                if(results.length > 0){
-                    db.query('insert into angelList_Task set ?',
-                    {name : name,parent:parent,Type:Type},(error, results)=>{
-                        if(error){
-                            console.log(error);
-                        }
-                        if(results){
-                            res.send('Inserted Successfully !');
-                        }
-                    })
-                }else{
-                    res.send([parent]+' not found');
-                }
-            })
-        
-    }
 
 }
 
@@ -177,7 +245,22 @@ exports.delete = (req,res)=>{
     }
 
 }
+exports.move = (req,res)=>{
+    let{name,parent} = req.body;
+     console.log([name],[parent]);
+    db.query('select * from angelList_Task where name = ? and parent =?',
+        [name,parent],(error,results)=>{
+            if(error){
+                console.log(error)
+            }else{
 
+               console.log(results[0].mail);
+
+                res.send(results[0].mail);
+            }
+        });
+    
+}
 exports.show = (req,res)=>{
     let {name} = req.body;
 

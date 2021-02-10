@@ -12,6 +12,8 @@ app.use(express.json());
 app.post('/add',authController.add);
 app.post('/delete',authController.delete);
 app.post('/show',authController.show);
+app.post('/move',authController.move);
+app.post('/addUser',authController.addUser);
 
 var db = mysql.createConnection({
     host : 'localhost',
@@ -26,7 +28,7 @@ db.connect((err)=>{
     console.log('DB Conn\'d');
 })
 
-app.listen(8034 , (error,data)=>{
+app.listen(8036, (error,data)=>{
     if(error)  
         console.log(error);
     console.log('Conn\'d');
