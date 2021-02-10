@@ -1,0 +1,299 @@
+{
+	"info": {
+		"_postman_id": "69079070-c28c-4163-912e-4adbece1a5dc",
+		"name": "digitaltrons_task",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8036/addUser",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "name",
+						"value": "kalyan",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"Folder3\",\n\t\"Type\":\"Folder\",\n\t\"parent\":\"Folder2\",\n\t\"User\":\"bhanu\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8036/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8036",
+					"path": [
+						"add"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "kalyan",
+							"disabled": true
+						},
+						{
+							"key": "email",
+							"value": "kalyan@g.c",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "kalyan",
+							"disabled": true
+						},
+						{
+							"key": "passwordConf",
+							"value": "kalyan",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Adding new users"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8036/add",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "name",
+						"value": "kalyan",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"Folder3\",\n\t\"Type\":\"Folder\",\n\t\"parent\":\"Folder2\",\n\t\"User\":\"bhanu\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8036/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8036",
+					"path": [
+						"add"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "kalyan",
+							"disabled": true
+						},
+						{
+							"key": "email",
+							"value": "kalyan@g.c",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "kalyan",
+							"disabled": true
+						},
+						{
+							"key": "passwordConf",
+							"value": "kalyan",
+							"disabled": true
+						}
+					]
+				},
+				"description": "adding new file/folder"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8034/delete",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "name",
+						"value": "kalyan",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\" : \"Folder1\",\n\t\"Type\" : \"Folder\"\n}\n"
+				},
+				"url": {
+					"raw": "http://localhost:8034/delete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8034",
+					"path": [
+						"delete"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "kalyan",
+							"disabled": true
+						},
+						{
+							"key": "email",
+							"value": "kalyan@g.c",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "kalyan",
+							"disabled": true
+						},
+						{
+							"key": "passwordConf",
+							"value": "kalyan",
+							"disabled": true
+						}
+					]
+				},
+				"description": "removing file/folder"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8035/move",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "name",
+						"value": "kalyan",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"Fx1\",\n\t\"parent\":\"Folder1\"\n}\n\n"
+				},
+				"url": {
+					"raw": "http://localhost:8035/move",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8035",
+					"path": [
+						"move"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "kalyan",
+							"disabled": true
+						},
+						{
+							"key": "email",
+							"value": "kalyan@g.c",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "kalyan",
+							"disabled": true
+						},
+						{
+							"key": "passwordConf",
+							"value": "kalyan",
+							"disabled": true
+						}
+					]
+				},
+				"description": "moving one place to another"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8034/show",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "name",
+						"value": "kalyan",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\" : \"Folder1\"\n}\n\n"
+				},
+				"url": {
+					"raw": "http://localhost:8034/show",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8034",
+					"path": [
+						"show"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "kalyan",
+							"disabled": true
+						},
+						{
+							"key": "email",
+							"value": "kalyan@g.c",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "kalyan",
+							"disabled": true
+						},
+						{
+							"key": "passwordConf",
+							"value": "kalyan",
+							"disabled": true
+						}
+					]
+				},
+				"description": "diplaying the file/folders."
+			},
+			"response": []
+		}
+	]
+}
